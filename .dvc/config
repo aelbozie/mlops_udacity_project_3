@@ -1,5 +1,5 @@
 [core]
     remote = cdip
-    hardlink_lock = true
+    hardlink_lock = false
 ['remote "cdip"']
     url = s3://cdip

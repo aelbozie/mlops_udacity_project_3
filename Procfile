@@ -1,1 +1,1 @@
-web: uvicorn income_predictor.main:app --workers 4
+web: uvicorn income_predictor.main:app
