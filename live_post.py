@@ -21,6 +21,8 @@ data = {
 
 
 if __name__ == "__main__":
-    response = requests.post("https://cdip.herokuapp.com", data=json.dumps(data))
+    response = requests.post(
+        "https://cdip.herokuapp.com/predict", data=json.dumps(data)
+    )
     print(f"Status Code: {response.status_code}")
-    print(f"Response:{response.json()['Income']}")
+    print(response.json())
