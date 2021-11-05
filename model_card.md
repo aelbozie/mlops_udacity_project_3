@@ -19,8 +19,8 @@ The model is _only_ intended for the demonstration of deploying and serving a ma
 20% of the data was used for testing/evaluation.
 ## Metrics
 The metrics used to evaluate the model are:
-  - f1 score
-  - precision
-  - recall
+  - f1 score 0.72
+  - precision 0.80
+  - recall  0.65
 ## Ethical Considerations
 The dataset is quite outdated since it's from 1994. It does not provide any insight into current income with respect to demographics. The data is also not representative enough of the demographics within the dataset. See this [bias report](http://aequitas.dssg.io/audit/3pc04g0h/adult_rf_binary/report-1.html) for more details.

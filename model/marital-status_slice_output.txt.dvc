@@ -1,0 +1,4 @@
+outs:
+- md5: 78a8f2d676336e3133c2003b8bddee12
+  size: 681
+  path: marital-status_slice_output.txt

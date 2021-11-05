@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 
 from income_predictor.ml.data_utils import process_data
 from income_predictor.ml.model_utils import compute_model_metrics, inference
-from income_predictor.ml.train_model import CAT_FEATURES, DATA
+from income_predictor.ml.train_test_model import CAT_FEATURES, DATA
 
 
 @pytest.fixture(scope="module")
@@ -46,7 +46,7 @@ def test_compute_model_metrics_count(preds, y):
 
 def test_compute_model_metrics_range(y, preds):
     metrics = compute_model_metrics(y, preds)
-    result = map((lambda m: (m >= 0) and (m <= 1)), metrics)
+    result = map((lambda m: (m >= 0) & (m <= 1)), metrics)
     assert all(result)
 
 

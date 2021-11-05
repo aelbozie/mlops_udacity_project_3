@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.model_selection import GridSearchCV
@@ -84,3 +85,45 @@ def inference(model, X):
     """
     predictions = model.predict(X)
     return predictions
+
+
+def performance_by_feature_slice(
+    test: pd.DataFrame, feature: str, model, process_data_func, **kwargs
+) -> None:
+    """
+    Performance when a categorical feature is fixed to specific value (slicing)
+
+    Inputs
+    ------
+    test: pd.DataFrame
+        X features and y output variable
+    feature: str
+        feature to slice
+    model:
+        Model to test
+    process_data_func:
+        function to process the data
+    Returns
+    -------
+    None
+    """
+
+    with open(f"model/{feature}_slice_output.txt", "w") as f:
+        f.write(f"Performance  for {feature} feature")
+
+        for feature_slice in test[feature].unique():
+            df = test[test[feature] == feature_slice]
+            X_test, y_test, _, _ = process_data_func(df=df, **kwargs)
+            predictions = inference(model, X_test)
+            precision, recall, fbeta = compute_model_metrics(y_test, predictions)
+
+            f.write("\n")
+            f.write("\n")
+            f.write(f"{feature_slice}:")
+            f.write("\n")
+            f.write(f"fbeta:      {fbeta}")
+            f.write("\n")
+            f.write(f"precision:  {precision}")
+            f.write("\n")
+            f.write(f"recall:     {recall}")
+            f.write("\n")
