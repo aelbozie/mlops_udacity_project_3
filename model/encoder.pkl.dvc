@@ -1,0 +1,4 @@
+outs:
+- md5: ec9ebeefdc5094b3244945a8b8181d89
+  size: 1846
+  path: encoder.pkl

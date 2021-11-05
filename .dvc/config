@@ -1,0 +1,4 @@
+[core]
+    remote = cdip
+['remote "cdip"']
+    url = s3://cdip

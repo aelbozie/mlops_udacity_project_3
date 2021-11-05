@@ -1,0 +1,36 @@
+name: Census Data Income Predictor
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.5
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+      - name: Pull data from DVC
+        run: dvc pull
+      - name: Install dependencies
+        run: |
+          pip install -r dev_requirements.txt
+          pip install -r requirements.txt
+      - name: Run Linter
+        run: flake8 .
+      - name: Run Tests
+        run: python -m pytest
